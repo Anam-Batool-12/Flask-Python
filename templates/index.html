@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flask CRUD</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+  <div class="container py-5">
+    <div class="card shadow rounded-4">
+      <div class="card-header bg-primary text-white">
+        <h3 class="mb-0 text-center">Flask CRUD Application</h3>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }} alert-dismissible fade show mt-3" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <!-- End Flash Messages -->
+
+      </div>
+
+      <div class="card-body">
+        <table class="table table-hover table-bordered align-middle mb-0">
+          <thead class="table-light">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Phone</th>
+              <th scope="col" style="width: 150px;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for record in data %}
+            <tr>
+              <td>{{ record.id }}</td>
+              <td>{{ record.name }}</td>
+              <td>{{ record.email }}</td>
+              <td>{{ record.phone }}</td>
+              <td>
+                <a href="{{ url_for('edit', id=record.id) }}" class="btn btn-sm btn-warning">Edit</a>
+                <a href="{{ url_for('delete', id=record.id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="d-flex gap-3 mt-5">
+      <a href="{{ url_for('download') }}" class="btn btn-info">Download CSV</a>
+
+      <a href="{{ url_for('create') }}" class="btn btn-success">Create</a>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>

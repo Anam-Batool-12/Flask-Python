@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Record</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <div class="container py-5">
+    <div class="card shadow rounded-4">
+      <div class="card-header bg-warning text-white">
+        <h3 class="mb-0 text-center">Edit Entry</h3>
+      </div>
+      <div class="card-body">
+        <form action="{{ url_for('edit', id=record.id) }}" method="POST">
+            <div class="mb-3">
+              <label for="id" class="form-label">ID (cannot change)</label>
+              <input type="text" id="id" class="form-control" value="{{ record.id }}" disabled>
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" name="name" id="name" class="form-control" value="{{ record.name }}" required />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" name="email" id="email" class="form-control" value="{{ record.email }}" required />
+            </div>
+            <div class="mb-3">
+              <label for="phone" class="form-label">Phone</label>
+              <input type="text" name="phone" id="phone" class="form-control" value="{{ record.phone }}" required />
+            </div>
+            <div class="d-flex justify-content-between">
+              <a href="{{ url_for('home') }}" class="btn btn-secondary">Back</a>
+              <button type="submit" class="btn btn-warning text-white">Update</button>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>
